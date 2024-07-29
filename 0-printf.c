@@ -30,7 +30,7 @@ int _printf(const char *format, ...)
 				case 's':
 					s = va_arg(args, char *);
 					if (s == NULL)
-						break;
+						s = "(null)";
 					for (; *s != '\0'; count++, s++)
 						write(1, s, 1);
 					break;
