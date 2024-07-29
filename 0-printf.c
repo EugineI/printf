@@ -39,9 +39,6 @@ int _printf(const char *format, ...)
 					count++;
 					break;
 				default:
-					write(1, ptr - 1, 1);
-					write(1, ptr, 1);
-					count += 2;
 					break;
 			} } else
 		{
