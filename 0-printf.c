@@ -57,7 +57,7 @@ int _printf(const char *format, ...)
 					count += write(1, pos, &buf[sizeof(buf)] - pos);
 					break;
 				default:
-					write (1, ptr - 1, 1);
+					write(1, ptr - 1, 1);
 					write(1, ptr, 1);
 					count += 2;
 					break;
@@ -67,16 +67,3 @@ int _printf(const char *format, ...)
 			count++; }
 	} va_end(args);
 	return (count); }
-	int main() {
-		    int num = 123;
-		        char ch = 'A';
-			    char *str = "Hello";
-			        
-			        _printf("Character: %c\n", ch); 
-				    _printf("String: %s\n", str); 
-				        _printf("Integer: %d\n", num); 
-					    _printf("Negative Integer: %i\n", -456); 
-					        _printf("This is a %% sign\n");  
-						    _printf("Unsupported: %f\n", 3.14); 
-						        return 0;
-	}
