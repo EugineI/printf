@@ -10,6 +10,7 @@ int _printf(const char *format, ...)
 {
 	int count = 0;
 	const char *ptr;
+	char buf[12], *pos;
 	int i;
 	va_list args;
 
@@ -30,8 +31,7 @@ int _printf(const char *format, ...)
 						count++;
 						i = -i;
 					}
-					char buf[12];
-					char *pos = &buf[sizeof(buf) - 1];
+					pos = &buf[sizeof(buf) - 1];
 					*pos = '\0';
 					do {
 						pos--;
@@ -46,4 +46,4 @@ int _printf(const char *format, ...)
 		{
 			count += write(1, ptr, 1); }
 	} va_end(args);
-	return (count); 
+	return (count); }

@@ -12,8 +12,7 @@ int _printf(const char *format, ...)
 	va_list args;
 	const char *ptr;
 	int count = 0;
-	char c, *s, *pos, buf[12];
-	int i;
+	char c, *s;
 
 	va_start(args, format);
 	for (ptr = format; *ptr != '\0'; ptr++)
@@ -38,23 +37,6 @@ int _printf(const char *format, ...)
 				case '%':
 					write(1, ptr, 1);
 					count++;
-					break;
-				case 'i':
-				case 'd':
-					i = va_arg(args, int);
-					if (i < 0)
-					{
-						write(1, "-", 1);
-						count++;
-						i = -i; }
-					pos = &buf[sizeof(buf) - 1];
-					*pos = '\0';
-					do {
-						pos--;
-						*pos = '0' + i % 10;
-						i /= 10;
-					} while (i);
-					count += write(1, pos, &buf[sizeof(buf)] - pos);
 					break;
 				default:
 					write(1, ptr - 1, 1);
