@@ -12,7 +12,8 @@ int _printf(const char *format, ...)
 	va_list args;
 	const char *ptr;
 	int count = 0;
-	char c, *s;
+	char c, *s, *pos, buf[12];
+	int i;
 
 	va_start(args, format);
 	for (ptr = format; *ptr != '\0'; ptr++)
@@ -38,6 +39,23 @@ int _printf(const char *format, ...)
 					write(1, ptr, 1);
 					count++;
 					break;
+				case 'i':
+				case 'd':
+					i = va_arg(args, int);
+					if (i < 0)
+					{
+						write(1, "-", 1);
+						count++;
+						i = -i; }
+					pos = &buf[sizeof(buf) - 1];
+					*pos = '\0';
+					do {
+						pos--;
+						*pos = '0' + i % 10;
+						i /= 10;
+					} while (i);
+					count += write(1, pos, &buf[sizeof(buf)] - pos);
+					break;
 				default:
 					write (1, ptr - 1, 1);
 					write(1, ptr, 1);
@@ -49,3 +67,16 @@ int _printf(const char *format, ...)
 			count++; }
 	} va_end(args);
 	return (count); }
+	int main() {
+		    int num = 123;
+		        char ch = 'A';
+			    char *str = "Hello";
+			        
+			        _printf("Character: %c\n", ch); 
+				    _printf("String: %s\n", str); 
+				        _printf("Integer: %d\n", num); 
+					    _printf("Negative Integer: %i\n", -456); 
+					        _printf("This is a %% sign\n");  
+						    _printf("Unsupported: %f\n", 3.14); 
+						        return 0;
+	}
